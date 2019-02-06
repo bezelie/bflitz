@@ -10,13 +10,11 @@ import sys
 
 # メインループ
 def main():
-  try:
-    print ("撮影します")
     subprocess.call("sudo raspistill -rot 180 -o test.jpg", shell=True)
     # -rot 180 ：１８０度回転
-    sleep(4)
-  except KeyboardInterrupt:
-    print ("  終了しました")
+    print ("写真を撮りました")
+    sleep(1)
+    print ("ファイルマネージャーでtest.jpgを開いてみてください")
     sys.exit(0)
 
 if __name__ == "__main__":
