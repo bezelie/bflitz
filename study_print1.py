@@ -7,6 +7,7 @@ import sys
 from time import sleep
 
 while True:
-  print ("Hello world %s" % (sys.argv))
+  print ("Hello world %s" % (sys.argv[0]))
+  # sys.argv = コマンドライ引数（リスト型）
   sys.stdout.flush()
   sleep(1)

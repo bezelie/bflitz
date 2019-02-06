@@ -16,13 +16,16 @@ GPIO.setup(pinLed, GPIO.OUT)
 
 # メインループ
 def main():
-  while True:
-    print ("点灯")
-    GPIO.output (pinLed, True)
-    sleep(1)
-    print ("消灯")
-    GPIO.output (pinLed, False)
-    sleep(1)
+  try:
+    while True:
+      print ("点灯")
+      GPIO.output (pinLed, True)
+      sleep(1)
+      print ("消灯")
+      GPIO.output (pinLed, False)
+      sleep(1)
+  except:
+    GPIO.cleanup()                     # ポートをクリア
 
 if __name__ == "__main__":
     main()

@@ -6,3 +6,6 @@
 list = []
 list = [1, 2, 3, 4]
 print (list)
+list = ["abc","あいう","123",""]
+print (list)
+print (list[1])
