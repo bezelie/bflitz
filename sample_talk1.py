@@ -3,7 +3,7 @@
 # Sample Code : 音声合成サンプル
 # 
 
-# ライブラリの読み込み
+# モジュールのインポート
 from time import sleep                # ウェイト処理
 import subprocess                     # 外部プロセスを実行するモジュール
 import sys
