@@ -1,11 +1,19 @@
 #!/bin/bash
 # 音声合成（Open JTalk）起動スクリプト
+
+# メッセージがない場合は終了
+CMD=`basename $0`
+if [ $# -lt 1 ]; then
+  echo "Usage: ${CMD} <message>"
+  exit 1  # エラーコード 1で終了
+fi
+
 #HTSVOICE=/usr/share/hts-voice/nitech-jp-atr503-m001/nitech_jp_atr503_m001.htsvoice
 #HTSVOICE=/usr/share/hts-voice/htsvoice-tohoku-f01/tohoku-f01-neutral.htsvoice
 # angry, happy, neutral, sad
-HTSVOICE=/usr/share/hts-voice/mei/mei_normal.htsvoice
-DICDIRE=/var/lib/mecab/dic/open-jtalk/naist-jdic/
-VOICEDATA=/tmp/voice.wav
+HTSVOICE=/usr/share/hts-voice/mei/mei_normal.htsvoice # 音声データファイル名
+DICDIRE=/var/lib/mecab/dic/open-jtalk/naist-jdic/ # 形態素解析ソフトMeCabの辞書ディレクトリ名
+VOICEDATA=/tmp/voice.wav # 生成する音声合成データファイル名
 sudo echo "$1" | open_jtalk \
 -x $DICDIRE \
 -m $HTSVOICE \
@@ -39,3 +47,4 @@ sudo echo "$1" | open_jtalk \
 amixer cset numid=1 100%
 aplay -q -D plughw:0,0 $VOICEDATA
 # sudo rm -f $VOICEDATA
+exit 0

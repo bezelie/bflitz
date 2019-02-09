@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# Sample Code : スイッチ（＋プルダウン抵抗）入力のサンプル
+# Sample Code : スイッチ入力のサンプル
 # マニュアルを見てラズパイにスイッチを接続しておいてください。
 
 # モジュールのインポート
@@ -12,17 +12,18 @@ pinSwitch = 4
 
 # 初期設定
 GPIO.setmode(GPIO.BCM)                 # GPIOをGPIO番号で指定できるように設定
-GPIO.setup(pinSwitch, GPIO.IN)         # GPIOの4ピンを入力モードに設定
+GPIO.setup(pinSwitch, GPIO.IN, pull_up_down=GPIO.PUD_UP)  
+# GPIO4を入力モードに設定し、プルアップ抵抗を有効化。
 
 # 関数
 def main():
   try:
     print ("開始します")
     while True:                            # 繰り返し処理
-      if GPIO.input(pinSwitch)==GPIO.HIGH: # GPIO4に3.3Vの電圧がかかっていたら・・・
-        print ("スイッチが押されています")
+      if GPIO.input(pinSwitch)==GPIO.HIGH: # GPIO4に電圧がかかっていたら・・・
+        print ("スイッチは押されてません")
       else:                                # それ以外の場合は・・・
-        print ("押されてません")
+        print ("押されました")
       sleep (0.5)                          # 0.5秒待つ
   except KeyboardInterrupt:                # コントロール＋Cが押された場合の処理
     print ("終了しました")
