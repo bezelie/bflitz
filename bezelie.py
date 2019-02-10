@@ -21,8 +21,15 @@ import sys
 bus = smbus.SMBus(1)
 
 # 変数
-trimJson = "/home/pi/bezelie/bflitz/data_trim.json"   # 設定ファイル
-tts = "/home/pi/bezelie/bflitz/exec_talkJpn.sh"   # 発話シェルスクリプトのファイル名
+trimJson = "data_trim.json"   # 設定ファイル
+tts = "exec_talkJpn.sh"       # 発話シェルスクリプトのファイル名
+
+def main():
+  print ("centering...")
+  bez = Control()               # べゼリー操作インスタンスの生成
+  bez.setCenter()
+  sleep (0.5)
+  print("done")
 
 class Control(object): # クラスの定義
 
@@ -121,10 +128,15 @@ class Control(object): # クラスの定義
         self.yawNow = self.moveServo((id-1)*3, degree, self.trimYaw, max, min, speed, self.yawNow)
 
 # Action -----------------------------
+  def setCenter(self):
+    self.setPCA9685Duty(0, 0, 300)
+    self.setPCA9685Duty(1, 0, 300)
+    self.setPCA9685Duty(2, 0, 300)
+
   def moveCenter(self): # 3つのサーボの回転位置をトリム値に合わせる
-    self.movePitch(1, self.trimPitch)
-    self.moveRoll(1, self.trimRoll)
-    self.moveYaw(1, self.trimYaw)
+    self.movePitch(1, 0)
+    self.moveRoll(1, 0)
+    self.moveYaw(1, 0)
     sleep (0.5)
 
   def pitchUpLong(self, id, time=2): # 
@@ -344,11 +356,4 @@ class Control(object): # クラスの定義
 
 # スクリプトとして実行された場合はセンタリングを行う
 if __name__ == "__main__":
-  bez = Control()               # べゼリー操作インスタンスの生成
-  f = open (trimJson,'r')
-  readData = json.load(f)
-  bez.trimPitch = int(readData['data1'][0]['pitch'])
-  bez.trimRoll = int(readData['data1'][0]['roll'])
-  bez.trimYaw = int(readData['data1'][0]['yaw'])
-  bez.moveCenter()
-  sleep(1)
+  main()

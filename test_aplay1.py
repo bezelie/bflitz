@@ -9,16 +9,12 @@ import subprocess                     # 外部プロセスを実行するモジ�
 import sys
 
 # メインループ
-def main():
-  try:
-    while (True):
-      subprocess.call("aplay -l", shell=True)
-      subprocess.call("aplay -D plughw:0,0 Front_Center.wav", shell=True)
-      # plughw:の後の２つの数字が、カード番号とデバイス番号に合っていることを確認してください。
-      sleep(0.5)
-  except KeyboardInterrupt:
-    print (' 終了しました')
-    sys.exit(0)
-
-if __name__ == "__main__":
-    main()
+try:
+  while (True):
+    subprocess.call("aplay -l", shell=True)
+    subprocess.call("aplay -D plughw:0,0 Front_Center.wav", shell=True)
+    # plughw:の後の２つの数字が、カード番号とデバイス番号に合っていることを確認してください。
+    sleep(0.5)
+except KeyboardInterrupt:
+  print (' 終了しました')
+  sys.exit(0)
