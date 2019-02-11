@@ -8,9 +8,6 @@ if [ $# -lt 1 ]; then
   exit 1  # エラーコード 1で終了
 fi
 
-#HTSVOICE=/usr/share/hts-voice/nitech-jp-atr503-m001/nitech_jp_atr503_m001.htsvoice
-#HTSVOICE=/usr/share/hts-voice/htsvoice-tohoku-f01/tohoku-f01-neutral.htsvoice
-# angry, happy, neutral, sad
 HTSVOICE=/usr/share/hts-voice/mei/mei_normal.htsvoice # 音声データファイル名
 DICDIRE=/var/lib/mecab/dic/open-jtalk/naist-jdic/ # 形態素解析ソフトMeCabの辞書ディレクトリ名
 VOICEDATA=/tmp/voice.wav # 生成する音声合成データファイル名
@@ -25,7 +22,10 @@ sudo echo "$1" | open_jtalk \
 -u 0.0 \
 -jm 1.0 \
 -jf 1.0 \
--z 10000 \
+-z 10000
+aplay -q -D plughw:0,0 $VOICEDATA
+# sudo rm -f $VOICEDATA
+exit 0
 
 # s   サンプリング周波数　1-
 #     0000-
@@ -43,8 +43,3 @@ sudo echo "$1" | open_jtalk \
 # jf  F0系列内変動の重み 0.0-(1.0)-
 #     0にすると平坦なロボット声になる。
 # z   オーディオバッファサイズ 0-(0)-
-
-amixer cset numid=1 100%
-aplay -q -D plughw:0,0 $VOICEDATA
-# sudo rm -f $VOICEDATA
-exit 0

@@ -3,13 +3,13 @@
 # Sample Code : 音声合成サンプル
 
 # モジュールのインポート
-from time import sleep                # ウェイト処理
-import subprocess                     # 外部プロセスを実行するモジュール
+from time import sleep     # ウェイト処理
+import subprocess          # 外部プロセスを実行するモジュール
 import sys
 
 # 変数
-ttsJpn = "exec_talkJpn.sh" # 発話シェルスクリプトのファイル名
-ttsEng = "exec_talkEng.sh" # 発話シェルスクリプトのファイル名
+ttsJpn = "exec_talkJpn.sh" # 日本語発話シェルスクリプトのファイル名
+ttsEng = "exec_talkEng.sh" # 英語発話シェルスクリプトのファイル名
 
 # メインループ
 try:

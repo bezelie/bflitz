@@ -1,18 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# julius音声認識サンプル
-# for Raspberry Pi
+# Sample Code : julius音声認識サンプル
 
+# モジュールのインポート
 from time import sleep             # ウェイト処理
 import subprocess                  # 外部プロセスを実行するモジュール
 import socket                      # ソケット通信モジュール
 import select                      # 待機モジュール
 import sys                         # python終了sys.exit()のために必要
 
+# 変数
 ttsJpn = "exec_talkJpn.sh" # 音声合成
-
-# 変数の初期化
-muteTime = 1        # 音声入力を無視する時間
 bufferSize = 256    # 受信するデータの最大バイト。２の倍数が望ましい。
 
 # 関数
@@ -38,7 +36,7 @@ for count in range(3):
     enabled_julius = True
     break
   except socket.error:
-    # print ('failed socket connect. retry')
+    print ('failed socket connect. retry')
     pass
 if enabled_julius == False:
   print ('Could not find Julius')
@@ -54,7 +52,7 @@ try:
   data = ""
   socket_buffer_clear()
   while True:
-    data = str(client.recv(bufferSize).decode('utf-8'))  # Juliusサーバーから受信
+    data = str(client.recv(bufferSize)).decode('utf-8')  # Juliusサーバーから受信
     if "<RECOGOUT>" in data:
       new = ""
     new = new + data

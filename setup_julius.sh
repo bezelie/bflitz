@@ -1,6 +1,6 @@
 #! /bin/bash
 # setting up the Julius
-#
+# 音声認識エンジンJuliusのインストール
 
 echo "Step0= setting snd-pcm-oss"
 #sudo modprobe snd-pcm-oss
