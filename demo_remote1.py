@@ -18,7 +18,7 @@ bez = bezelie.Control()               # べゼリー操作インスタンスの�
 # メインループ
 if len(sys.argv)>1:
   comm1 = str(sys.argv[1])
-  if comm1 == "toPeople":
+  if randint(1,2)==1:
     print ("speak to people")
     r = randint(1,4)
     if r == 1:
@@ -28,20 +28,21 @@ if len(sys.argv)>1:
     elif r == 3:
       cmds = ['sh',ttsEng, 'my-name-is-bezelie'] #
     else:
-      cmds = ['sh',ttsEng, 'hello'] #
+      cmds = ['sh',ttsEng, 'nice-to-meet-you'] #
     proc = subprocess.Popen(cmds, stdout=subprocess.PIPE) # コマンドの呼び出し
+    sleep(0.5)
     bez.moveYaw(1,0)
     sleep(0.5)
     bez.movePitch(1,0)
-    sleep(0.1)
-    bez.moveRoll(1,20)
     sleep(0.2)
+    bez.moveRoll(1,20)
+    sleep(0.5)
     bez.moveRoll(1,-20)
     sleep(0.5)
     bez.moveRoll(1,0)
-    sleep(0.2)
+    sleep(0.5)
     proc.communicate() # コマンド実行プロセスが終了するまで待機
-  elif comm1 == "toMaster":
+  else:
     print ("spkeak to master")
     r = randint(1,4)
     if r == 1:
@@ -51,14 +52,14 @@ if len(sys.argv)>1:
     elif r == 3:
       cmds = ['sh',ttsEng, 'you-look-great!'] #
     else:
-      cmds = ['sh',ttsEng, 'hello'] #
+      cmds = ['sh',ttsEng, 'I-love-you'] #
     proc = subprocess.Popen(cmds, stdout=subprocess.PIPE) # コマンドの呼び出し
-    bez.moveYaw(1,30)
-    sleep(0.5)
+    bez.moveYaw(1,20)
+    sleep(1)
     bez.movePitch(1,20)
-    sleep(0.2)
+    sleep(0.5)
     bez.moveRoll(1,20)
-    sleep(0.2)
+    sleep(0.5)
     bez.moveRoll(1,0)
-    sleep(0.2)
+    sleep(0.5)
     proc.communicate() # コマンド実行プロセスが終了するまで待機

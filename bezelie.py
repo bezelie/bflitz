@@ -356,4 +356,14 @@ class Control(object): # クラスの定義
 
 # スクリプトとして実行された場合はセンタリングを行う
 if __name__ == "__main__":
-  main()
+  bez = Control()               # べゼリー操作インスタンスの生成
+  if len(sys.argv)==1:
+    print ("centering...")
+    bez.setCenter()
+    sleep (0.5)
+    print("done")
+  else:
+    comm1=str(sys.argv[1])
+    print (comm1)
+    if comm1=="yaw":
+      bez.moveYaw(1, 30, speed=1)

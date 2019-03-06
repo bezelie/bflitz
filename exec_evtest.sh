@@ -1,10 +1,11 @@
 #! /bin/bash
 
 sh exec_talkEng.sh "Start"
-python3 demo_remote1.py
+# python3 demo_remote1.py
 
 # イベントデバイス名の指定
-EVDEV=/dev/input/event3
+# sudo evtestでイベント番号を調べること
+EVDEV=/dev/input/event0
 
 # 一時ディレクトリの作成と FIFO パスの指定
 FIFODIR=$(mktemp -d) 

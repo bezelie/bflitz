@@ -1,0 +1,4 @@
+keyup=python3 /home/pi/bezelie/bflitz/demo_remote1.py toPeople
+keydown=echo DOWN
+longdown=echo LONG DOWN
+longup=python3 LONG UP
