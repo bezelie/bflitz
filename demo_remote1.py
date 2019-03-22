@@ -54,12 +54,15 @@ if len(sys.argv)>1:
     else:
       cmds = ['sh',ttsEng, 'I-love-you'] #
     proc = subprocess.Popen(cmds, stdout=subprocess.PIPE) # コマンドの呼び出し
+    sleep(0.5)
     bez.moveYaw(1,20)
-    sleep(1)
+    sleep(0.5)
     bez.movePitch(1,20)
     sleep(0.5)
     bez.moveRoll(1,20)
     sleep(0.5)
     bez.moveRoll(1,0)
+    sleep(0.5)
+    bez.moveYaw(1,0)
     sleep(0.5)
     proc.communicate() # コマンド実行プロセスが終了するまで待機
