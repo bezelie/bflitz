@@ -12,7 +12,7 @@ import sys
 # 定義
 trigger_pin = 17      # GPIO 17
 echo_pin = 27         # GPIO 27
-actionDistance = 10.0 # centi mater
+actionDistance = 10.0 # しきい値（単位：センチ）
 
 # 初期設定
 #bezelie.moveCenter()
@@ -48,7 +48,7 @@ def main():
       distance = get_distance()
       print(distance, end="\t")
       if distance < actionDistance:
-        print ("近いですね")
+        print ("近いです")
       else:
         print ("遠い")
       sleep(0.5)

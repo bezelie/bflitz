@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # Sample Code : アナログ入力のサンプル
-# ラズパイにADコンバータとアナログセンサーを接続しておいてください。
+# ジョイスティックを接続しておいてください。
 
 # ライブラリの読み込み
 import RPi.GPIO as GPIO
