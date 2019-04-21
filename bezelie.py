@@ -124,10 +124,10 @@ class Control(object): # クラスの定義
         self.yawNow = self.moveServo((id-1)*3, degree, self.trimYaw, max, min, speed, self.yawNow)
 
 # Action -----------------------------
-  def setCenter(self):
-    self.setPCA9685Duty(0, 0, 300)
-    self.setPCA9685Duty(1, 0, 300)
-    self.setPCA9685Duty(2, 20, 300)
+#  def setCenter(self):
+#    self.setPCA9685Duty(0, 0, 300)
+#    self.setPCA9685Duty(1, 0, 300)
+#    self.setPCA9685Duty(2, 20, 300)
 
   def moveCenter(self): # 3つのサーボの回転位置をトリム値に合わせる
     self.movePitch(1, 0)
@@ -136,15 +136,12 @@ class Control(object): # クラスの定義
     sleep (0.5)
 
   def pitchUpLong(self, id, time=2): # 
-#        while not self.stop_event.is_set():
         self.movePitch(id, 5)
 
   def pitchDownLong(self, id, time=2): # 
-#        while not self.stop_event.is_set():
         self.movePitch(id, -15)
 
   def pitchUp2(self, id, time=0.1): # 
-#        while not self.stop_event.is_set():
         self.movePitch(id, 5)
         self.movePitch(id, 0)
         sleep (time)
@@ -153,7 +150,6 @@ class Control(object): # クラスの定義
         sleep (time)
 
   def pitchDown2(self, id, time=0.1): # 
-#        while not self.stop_event.is_set():
         self.movePitch(id, -5)
         self.movePitch(id, 0)
         sleep (time)
@@ -162,74 +158,58 @@ class Control(object): # クラスの定義
         sleep (time)
 
   def pitchUpDown(self, id, time=0.5): # 
-#        while not self.stop_event.is_set():
         self.movePitch(id, 5)
         self.movePitch(id, -10)
         self.movePitch(id, 0)
 
   def pitchUpMax(self, id, time=0.5): # 
-#        while not self.stop_event.is_set():
         self.movePitch(id, 5)
 
   def pitchDownMax(self, id, time=0.5): # 
-#        while not self.stop_event.is_set():
         self.movePitch(id, -15)
         self.movePitch(id, 0)
 
   def pitchCenter(self, id, time=0.2): # 
-#        while not self.stop_event.is_set():
         self.movePitch(id, 0)
 
   def rollRightLeft(self, id, time=0.5): # 
- #       while not self.stop_event.is_set():
         self.moveRoll(id, 20)
         self.moveRoll(id, -20)
         self.moveRoll(id, 0)
 
   def rollRightLong(self, id, time=2): # 
-#        while not self.stop_event.is_set():
         self.moveRoll(id, 30)
 
   def rollRightMax(self, id, time=0.5): # 
-#        while not self.stop_event.is_set():
         self.moveRoll(id, 30)
         sleep (time)
         self.moveRoll(id, 0)
 
   def rollLeftMax(self, id, time=0.5): # 
-#        while not self.stop_event.is_set():
         self.moveRoll(id, -30)
 
   def rollCenter(self, id, time=0.2): # 
-#        while not self.stop_event.is_set():
         self.moveYaw(id, 0)
 
   def yawRightLeft(self, id, time=0.5): # 
-#        while not self.stop_event.is_set():
         self.moveYaw(id, 20)
         self.moveYaw(id, -20)
         self.moveYaw(id, 0)
 
   def yawRight(self, id, time=2): # 
-#        while not self.stop_event.is_set():
         self.moveYaw(id, 10)
 
   def yawRightMax(self, id, time=2): # 
-#        while not self.stop_event.is_set():
         self.moveYaw(id, 30)
 
   def yawRightPitchDown(self, id, time=0.5): # 
-#        while not self.stop_event.is_set():
         self.moveYaw(id, 30)
         sleep (time)
         self.movePitch(id, -10)
         sleep (time)
         self.movePitch(id, 0)
 
-#            self.moveYaw(id, 0)
-
   def yawLeftPitchDown(self, id, time=0.5): # 
-#        while not self.stop_event.is_set():
         self.moveYaw(id, -30)
         sleep (time)
         self.movePitch(id, -10)
@@ -237,7 +217,6 @@ class Control(object): # クラスの定義
         self.movePitch(id, 0)
 
   def yawLeftMax(self, id, time=2): # 
-#        while not self.stop_event.is_set():
         self.moveYaw(id, -30)
 #            sleep (time)
 #            self.moveYaw(id, 0)
@@ -363,7 +342,7 @@ if __name__ == "__main__":
   bez = Control()               # べゼリー操作インスタンスの生成
   if len(sys.argv)==1:
     print ("centering...")
-    bez.setCenter()
+    bez.moveCenter()
     sleep (0.5)
     print("done")
   else:
