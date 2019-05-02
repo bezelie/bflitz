@@ -130,10 +130,9 @@ class Control(object): # クラスの定義
 #    self.setPCA9685Duty(2, 20, 300)
 
   def moveCenter(self): # 3つのサーボの回転位置をトリム値に合わせる
-    self.movePitch(1, 0)
-    self.moveRoll(1, 0)
-    self.moveYaw(1, 0)
-    sleep (0.5)
+    self.movePitch(1, 1)
+    self.moveRoll(1, 1)
+    self.moveYaw(1, 1)
 
   def pitchUpLong(self, id, time=2): # 
         self.movePitch(id, 5)
@@ -165,7 +164,7 @@ class Control(object): # クラスの定義
   def pitchUpMax(self, id, time=0.5): # 
         self.movePitch(id, 5)
 
-  def pitchDownMax(self, id, time=0.5): # 
+  def pitchDownMax(self, id, time=0.1): # 
         self.movePitch(id, -15)
         self.movePitch(id, 0)
 
@@ -180,7 +179,7 @@ class Control(object): # クラスの定義
   def rollRightLong(self, id, time=2): # 
         self.moveRoll(id, 30)
 
-  def rollRightMax(self, id, time=0.5): # 
+  def rollRightMax(self, id, time=0.1): # 
         self.moveRoll(id, 30)
         sleep (time)
         self.moveRoll(id, 0)
@@ -191,7 +190,7 @@ class Control(object): # クラスの定義
   def rollCenter(self, id, time=0.2): # 
         self.moveYaw(id, 0)
 
-  def yawRightLeft(self, id, time=0.5): # 
+  def yawRightLeft(self, id, time=0.1): # 
         self.moveYaw(id, 20)
         self.moveYaw(id, -20)
         self.moveYaw(id, 0)
@@ -348,5 +347,13 @@ if __name__ == "__main__":
   else:
     comm1=str(sys.argv[1])
     print (comm1)
+    if comm1=="center":
+      bez.act(1, "pitchCenter")
+      bez.act(1, "rollCenter")
+      bez.act(1, "yawCenter")
+    if comm1=="pitch":
+      bez.act(1, "pitchDownMax")
+    if comm1=="roll":
+      bez.act(1, "rollRightMax")
     if comm1=="yaw":
-      bez.moveYaw(1, 30, speed=1)
+      bez.act(1, "yawRightLeft")
