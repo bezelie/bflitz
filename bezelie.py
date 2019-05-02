@@ -351,9 +351,11 @@ if __name__ == "__main__":
       bez.act(1, "pitchCenter")
       bez.act(1, "rollCenter")
       bez.act(1, "yawCenter")
-    if comm1=="pitch":
+    elif comm1=="pitch":
       bez.act(1, "pitchDownMax")
-    if comm1=="roll":
+    elif comm1=="roll":
       bez.act(1, "rollRightMax")
-    if comm1=="yaw":
+    elif comm1=="yaw":
       bez.act(1, "yawRightLeft")
+    else:
+      bez.act(1, comm1)
