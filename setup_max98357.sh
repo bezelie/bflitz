@@ -11,7 +11,7 @@ echo "Step2=/etc/modules"
 sudo sed -i -e 's/snd_bcm2835/#snd_bcm2835/' /etc/modules
 
 echo "Step3=/etc/asound.conf"
-sudo cp ~/bezelie/bflitz/asound-conf.txt /etc/asound.conf
+sudo cp asound-conf.txt /etc/asound.conf
 
 echo "Step4=/boot/config.txt"
 # デバイスツリーオーバレイの追加

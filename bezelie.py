@@ -15,12 +15,9 @@ import subprocess                  # 外部プロセスを実行するモジュ�
 from PIL import Image, ImageDraw, ImageFont, ImageFilter #
 import numpy
 import sys
-#import cv2
 
 # CONST
 bus = smbus.SMBus(1)
-
-# 変数
 trimJson = "data_trim.json"   # 設定ファイル
 tts = "exec_talkJpn.sh"       # 発話シェルスクリプトのファイル名
 
@@ -124,11 +121,6 @@ class Control(object): # クラスの定義
         self.yawNow = self.moveServo((id-1)*3, degree, self.trimYaw, max, min, speed, self.yawNow)
 
 # Action -----------------------------
-#  def setCenter(self):
-#    self.setPCA9685Duty(0, 0, 300)
-#    self.setPCA9685Duty(1, 0, 300)
-#    self.setPCA9685Duty(2, 20, 300)
-
   def moveCenter(self): # 3つのサーボの回転位置をトリム値に合わせる
     self.movePitch(1, 1)
     self.moveRoll(1, 1)
@@ -217,11 +209,8 @@ class Control(object): # クラスの定義
 
   def yawLeftMax(self, id, time=2): # 
         self.moveYaw(id, -30)
-#            sleep (time)
-#            self.moveYaw(id, 0)
 
   def yawCenter(self, id, time=0.2): # 
-#        while not self.stop_event.is_set():
         self.moveYaw(id, 0)
 
   def moveRnd(self):
@@ -240,10 +229,6 @@ class Control(object): # クラスの定義
   def stop(self):
         self.stop_event.set()
         self.thread.join()
-#        thread_list = threading.enumerate()
-#        thread_list.remove(threading.main_thread())
-#        for thread in thread_list:
-#            thread.join()
 
   def act(self, id, act):
     self.stop_event = threading.Event()

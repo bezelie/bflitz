@@ -22,6 +22,7 @@ if [ ! -e /var/openjtalk ]; then
   sudo chown pi.pi /var/openjtalk # 所有者 pi、所有グループ pi を指定
 fi
 
-echo "Step4=fliteのインストール"
-sudo apt-get -y install flite
+echo "Step4=espeakのインストール"
+sudo apt-get install espeak
+
 echo "設定完了"

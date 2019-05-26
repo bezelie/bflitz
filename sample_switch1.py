@@ -8,7 +8,7 @@ from time import sleep    # sleep(ウェイト処理)ライブラリの読み込
 import RPi.GPIO as GPIO   # GPIO(汎用入出力端子)ライブラリの読み込み
 
 # 変数と定数
-pinSwitch = 4　　　　　　 # スイッチをGPIO 4に接続。
+pinSwitch = 4             # スイッチをGPIO 4に接続。
 
 # 初期設定
 GPIO.setmode(GPIO.BCM)    # GPIOをGPIO番号で指定できるように設定
