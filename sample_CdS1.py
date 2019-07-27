@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # Sample Code : 照度センサーのサンプル
-# CdSセンサーをアナログinput0と3Vに接続してください。
+# CdSセンサーをCdS(アナログinput0)と3Vに接続してください。
 
 # ライブラリの読み込み
 from time import sleep
@@ -72,7 +72,7 @@ def main():
       print("input = "+str(inputVal0))
       if inputVal0 < value:              # しきい値は条件によって変えてください。
         bez.movePitch(1, 20)            # 上を向く
-        subprocess.call("sh "+ttsJpn+" "+"にゃああ", shell=True)
+        subprocess.call("sh "+ttsJpn+" "+"くらいよお", shell=True)
         sleep(0.5)
         bez.movePitch(1, 0)
         sleep(0.5)

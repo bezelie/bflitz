@@ -23,7 +23,7 @@ def socket_buffer_clear():
       break
 
 #p = subprocess.Popen(["sh boot_julius.sh"], stdout=subprocess.PIPE, shell=True) # julius起動スクリプトを実行
-#pid = str(p.stdout.read().decode('utf-8')) # juliusのプロセスIDを取得
+#pid = p.stdout.read().decode('utf-8') # juliusのプロセスIDを取得
 #sleep(3) # 3秒間スリープ
 
 # TCPクライアントを作成しJuliusサーバーに接続する
@@ -52,13 +52,13 @@ try:
   data = ""
   socket_buffer_clear()
   while True:
-    data = str(client.recv(bufferSize)).decode('utf-8')  # Juliusサーバーから受信
+    data = client.recv(bufferSize).decode('utf-8')  # Juliusサーバーから受信
     if "<RECOGOUT>" in data:
       new = ""
     new = new + data
     if "</RECOGOUT>" in new:  # RECOGOUTツリーの最終行を見つけたら以下の処理を行う
       print (new)
-      if u"朝の挨拶" in new:
+      if "朝の挨拶" in new:
         cmds = ['sh',ttsJpn, 'どうもです'] #
         proc = subprocess.Popen(cmds, stdout=subprocess.PIPE) # コマンドの呼び出し
         proc.communicate() # コマンド実行プロセスが終了するまで待機
