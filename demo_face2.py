@@ -17,7 +17,7 @@ import math                        # 絶対値の計算に必要
 import bezelie                     # べゼリー専用サーボ制御モジュール
 
 waitMonologue = 100                # 顔が見つからなかったとき独り言を言う間隔
-csvFile   = "data_faceDialogE.csv"  # セリフリスト
+csvFile   = "data_faceDialogMFT.csv"  # セリフリスト
 ttsJpn   = "exec_talkJpn.sh"       # 音声合成実行ファイル
 ttsEng = "exec_talkEng.sh"         # 英語発話シェルスクリプトのファイル名
 debugFile = "debug.txt"            # debug用ファイル
@@ -51,7 +51,8 @@ def replyMessage(keyWord):        # 対話
       ansNum = i[3]               
 
   bez.moveRnd()
-  subprocess.call("sh "+ttsEng+" "+data[ansNum][1], shell=True)
+  #subprocess.call("sh "+ttsEng+" "+data[ansNum][1], shell=True)
+  subprocess.call("sh "+ttsJpn+" "+data[ansNum][1], shell=True)
   bez.stop()
 
 def debug_message(message):
@@ -75,7 +76,8 @@ bez = bezelie.Control()                 # べゼリー操作インスタンス�
 bez.moveCenter()                        # サーボの回転位置をトリム値に合わせる
 
 # 初回処理
-subprocess.call("sh "+ttsEng+" "+u"preparation-has-been-completed", shell=True)
+# subprocess.call("sh "+ttsEng+" "+u"preparation-has-been-completed", shell=True)
+subprocess.call("sh "+ttsJpn+" 準備完了", shell=True)
 
 # メインループ
 def main():
