@@ -18,9 +18,10 @@ import time
 # 定義
 trigger_pin = 17      # GPIO 17
 echo_pin = 27         # GPIO 27
-actionDistance = 20.0 # しきい値（単位：センチ$）
+actionDistance = 30.0 # しきい値（単位：センチ$）
+actionDistanceC = 10.0 # しきい値（単位：センチ$）
 waitMonologue = 500                # 顔が見つからなかったとき独り言を言う間隔
-csvFile   = "data_rangeDialog.csv"  # セリフリスト
+csvFile   = "data_rangeDialogE.csv"  # セリフリスト
 ttsJpn   = "exec_talkJpn.sh"       # 音声合成実行ファイル
 ttsEng = "exec_talkEng.sh"         # 英語発話シェルスクリプトのファイル名
 debugFile = "debug.txt"            # debug用ファイル
@@ -81,8 +82,8 @@ def replyMessage(keyWord):        # 対話
       ansNum = i[3]               
 
   bez.moveRnd()
-  #subprocess.call("sh "+ttsEng+" "+data[ansNum][1], shell=True)
-  subprocess.call("sh "+ttsJpn+" "+data[ansNum][1], shell=True)
+  subprocess.call("sh "+ttsEng+" "+data[ansNum][1], shell=True)
+  #subprocess.call("sh "+ttsJpn+" "+data[ansNum][1], shell=True)
   bez.stop()
 
 def debug_message(message):
@@ -106,8 +107,8 @@ bez = bezelie.Control()                 # べゼリー操作インスタンス�
 bez.moveCenter()                        # サーボの回転位置をトリム値に合わせる
 
 # 初回処理
-# subprocess.call("sh "+ttsEng+" "+u"preparation-has-been-completed", shell=True)
-subprocess.call("sh "+ttsJpn+" 準備完了", shell=True)
+subprocess.call("sh "+ttsEng+" "+u"preparation-has-been-completed", shell=True)
+# subprocess.call("sh "+ttsJpn+" 準備完了", shell=True)
 
 # メインループ
 def main():
@@ -125,13 +126,16 @@ def main():
         print ("近いです")
         if detected == "false":
           meet = 1
-          replyMessage(u"顔発見")
+          replyMessage(u"未発見")
 #          bez.act(1, 'pitchUpDown')
 #          bez.stop()
         else:
           meet = meet +1
-          if meet > 4:
-            replyMessage(u"顔認識")
+          if meet > 3:
+            if distance < actionDistanceC:
+              replyMessage(u"顔認識")
+            else:
+              replyMessage(u"顔発見")
             meet = 1
         detected = "true"
       else:                   # If no faces were detected.
