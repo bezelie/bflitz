@@ -50,7 +50,6 @@ class Control(object): # クラスの定義
       self.initPCA9685()
       # 第１引数はselfにするのが義務。
 
-
 # Servo ----------------------------
 
   def initPCA9685(self):
@@ -93,10 +92,6 @@ class Control(object): # クラスの定義
             dst = max
         if dst < min:
             dst = min
-        pinLed = 26                   # LED pin
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(pinLed, GPIO.OUT)
-        GPIO.output (pinLed, True)
         while (now != dst):
             if now < dst:
                 now += self.steps
@@ -108,8 +103,6 @@ class Control(object): # クラスの定義
                     now = dst
             self.setPCA9685Duty(id, 0, now)
             sleep(0.004 * self.steps *(speed))
-        GPIO.output (pinLed, False)
-        GPIO.cleanup()
         return (now)
 
   def movePitch(self, id, degree, speed=1):
@@ -333,11 +326,9 @@ if __name__ == "__main__":
   bez = Control()               # べゼリー操作インスタンスの生成
   if len(sys.argv)==1:
     print ("centering...")
-#    GPIO.output (pinLed, True)
     bez.moveCenter()
     sleep (0.5)
     print("done")
-#    GPIO.output (pinLed, False)
   else:
     comm1=str(sys.argv[1])
     print (comm1)
