@@ -21,13 +21,13 @@ echo_pin = 27         # GPIO 27
 actionDistance = 30.0 # しきい値（単位：センチ$）
 actionDistanceC = 10.0 # しきい値（単位：センチ$）
 waitMonologue = 500                # 顔が見つからなかったとき独り言を言う間隔
-csvFile   = "data_rangeDialogE.csv"  # セリフリスト
+#csvFile   = "data_rangeDialogE.csv"  # セリフリスト
+csvFile   = "data_rangeDialogJ.csv"  # セリフリスト
 ttsJpn   = "exec_talkJpn.sh"       # 音声合成実行ファイル
 ttsEng = "exec_talkEng.sh"         # 英語発話シェルスクリプトのファイル名
 debugFile = "debug.txt"            # debug用ファイル
 
 # 初期設定
-#bezelie.moveCenter()
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(trigger_pin, GPIO.OUT)
 GPIO.setup(echo_pin, GPIO.IN)
@@ -82,8 +82,8 @@ def replyMessage(keyWord):        # 対話
       ansNum = i[3]               
 
   bez.moveRnd()
-  subprocess.call("sh "+ttsEng+" "+data[ansNum][1], shell=True)
-  #subprocess.call("sh "+ttsJpn+" "+data[ansNum][1], shell=True)
+#  subprocess.call("sh "+ttsEng+" "+data[ansNum][1], shell=True)
+  subprocess.call("sh "+ttsJpn+" "+data[ansNum][1], shell=True)
   bez.stop()
 
 def debug_message(message):
@@ -107,8 +107,8 @@ bez = bezelie.Control()                 # べゼリー操作インスタンス�
 bez.moveCenter()                        # サーボの回転位置をトリム値に合わせる
 
 # 初回処理
-subprocess.call("sh "+ttsEng+" "+u"preparation-has-been-completed", shell=True)
-# subprocess.call("sh "+ttsJpn+" 準備完了", shell=True)
+#subprocess.call("sh "+ttsEng+" "+u"preparation-has-been-completed", shell=True)
+subprocess.call("sh "+ttsJpn+" 準備完了", shell=True)
 
 # メインループ
 def main():
@@ -127,8 +127,6 @@ def main():
         if detected == "false":
           meet = 1
           replyMessage(u"未発見")
-#          bez.act(1, 'pitchUpDown')
-#          bez.stop()
         else:
           meet = meet +1
           if meet > 3:
@@ -139,7 +137,6 @@ def main():
             meet = 1
         detected = "true"
       else:                   # If no faces were detected.
-#        bez.moveRoll(1, 0)
         print ("遠いです")
         detected = "false"       # 前回顔が認識されたかどうか
         meet = 0
@@ -152,13 +149,11 @@ def main():
           else:
             sign = 1
           prev_input_y = sign*randint(0,6)          # 乱数を発生させる
-#          bez.movePitch(1, prev_input_y)
           if prev_input_x > 0:
             sign = -1
           else:
             sign = 1
           prev_input_x = sign*randint(1,10)
-#          bez.moveYaw(1, prev_input_x)
           sleep (0.1)
       sleep(0.5)
 
