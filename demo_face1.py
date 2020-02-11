@@ -105,11 +105,6 @@ def main():
             maxSize=(640,480))                                  # Maximam face size
           if len(facerect) > 0:                                 # If some faces were detected...
             debug_message('detected')
-#            for rect in facerect:
-#              cv2.rectangle(stream.array,                       # Draw a rectangle at face place 
-#                tuple(rect[0:2]),                               # Upper Left
-#                tuple(rect[0:2]+rect[2:4]),                     # Lower Right
-#                (0,0,255), thickness=1)                         # Color and thickness
             if detected == "false":
               meet = 1
               replyMessage(u"顔発見")
